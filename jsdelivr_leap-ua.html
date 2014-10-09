@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>CDN Test</title>
+    
+    <meta charset="utf-8">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    
+    <meta name="msapplication-config" content="none"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CDN Test" />
+    
+    <link rel="stylesheet" type="text/css" href="//leap-ua.jsdelivr.net/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//leap-ua.jsdelivr.net/fontawesome/4.1.0/css/font-awesome.min.css" />
+
+</head>
+<body>
+<div class="container main ">
+    
+    <div>
+		<h2>Debug</h2>
+
+        <table class="table" style="word-wrap: break-word; word-break: break-all; font-size: 0.9em;">
+            <thead>
+                <tr>
+                    <th>Javascripts</th>
+                    <th>Stylesheets</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <ol id="sourceScripts">
+                    </ol>
+                </td>
+                <td>
+                    <ol id="sourceCss">
+                    </ol>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="table" style="word-wrap: break-word; font-size: 0.9em;">
+            <thead>
+                <tr>
+                    <th>Library</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>jQuery</td>
+                    <td id="statusJquery"></td>
+                </tr>
+                <tr>
+                    <td>Bootstrap</td>
+                    <td id="statusBootstrap"></td>
+                </tr>
+                <tr>
+                    <td>Mousetrap</td>
+                    <td id="statusMousetrap"></td>
+                </tr>
+                <tr>
+                    <td>Hogan</td>
+                    <td id="statusHogan"></td>
+                </tr>
+            </tbody>
+
+        </table>
+
+        <a class="btn btn-primary" href="javascript:(function() {if(!window.__profiler||window.__profiler.scriptLoaded!==true){var d=document,h=d.getElementsByTagName('head')[0],s=d.createElement('script'),l=d.createElement('div'),c=function(){if(l){d.body.removeChild(l);};window.__profiler=window.__profiler||new __Profiler();window.__profiler.init();__profiler.scriptLoaded=true;},t=new Date();s.type='text/javascript';l.style.cssText='z-index:999;position:fixed;top:10px;left:10px;display:inline;width:auto;font-size:14px;line-height:1.5em;font-family:Helvetica,Calibri,Arial,sans-serif;text-shadow:none;padding:3px 10px 0;background:#FFFDF2;box-shadow:0 0 0 3px rgba(0,0,0,.25),0 0 5px 5px rgba(0,0,0,.25); border-radius:1px';l.innerHTML='Just a moment';s.src='//kaaes.github.io/timing/profiler.js';s.onload=c;s.onreadystatechange=function(){console.log(arguments);if(this.readyState=='loaded'){c()}};d.body.appendChild(l);h.appendChild(s);} else if(window.__profiler instanceof __Profiler){window.__profiler.init()}})();">Check Loadtime</a>
+
+	</div>
+
+</div>
+
+<script type="text/javascript" src="//leap-ua.jsdelivr.net/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="//leap-ua.jsdelivr.net/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="//leap-ua.jsdelivr.net/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script type="text/javascript" src="//leap-ua.jsdelivr.net/hogan.js/3.0.0/hogan.min.js"></script>
+
+<script>
+    if (document.scripts) {
+        e = document.getElementById("sourceScripts");
+        h = "";
+        for (var i = 0; i < document.scripts.length; i++) {
+            if (document.scripts[i].src) {
+                h += "<li><a target='_blank' href='" + document.scripts[i].src + "'>" + document.scripts[i].src + "</a>";
+            }
+        }
+        e.innerHTML = h;
+    }
+    if (document.styleSheets) {
+        e = document.getElementById("sourceCss");
+        h = "";
+        for (var i = 0; i < document.styleSheets.length; i++) {
+            if (document.styleSheets[i].href) {
+                h += "<li><a target='_blank' href='" + document.styleSheets[i].href + "'>" + document.styleSheets[i].href + "</a>";
+            }
+        }
+        e.innerHTML = h;
+    }
+    b = document.getElementById("tweetResult");
+    e = document.getElementById("statusJquery");
+    if (typeof jQuery == 'undefined') {
+        e.innerHTML = '<i style="color: red" class="fa fa-times-circle"></i> Fail.';
+    } else {
+        e.innerHTML = '<i style="color: green" class="fa fa-check-circle"></i> Loaded.';
+    }
+    e = document.getElementById("statusBootstrap");
+    if (typeof $ == 'undefined') {
+        e.innerHTML = '<i style="color: orange" class="fa fa-question-circle"></i> Unable to detect.';
+    } else if (typeof($.fn.modal) === 'undefined') {
+        e.innerHTML = '<i style="color: red" class="fa fa-times-circle"></i> Fail.';
+    } else {
+        e.innerHTML = '<i style="color: green" class="fa fa-check-circle"></i> Loaded.';
+    }
+    e = document.getElementById("statusMousetrap");
+    if (typeof Mousetrap == 'undefined') {
+        e.innerHTML = '<i style="color: red" class="fa fa-times-circle"></i> Fail.';
+    } else {
+        e.innerHTML = '<i style="color: green" class="fa fa-check-circle"></i> Loaded.';
+    }
+    e = document.getElementById("statusHogan");
+    if (typeof Hogan == 'undefined') {
+        e.innerHTML = '<i style="color: red" class="fa fa-times-circle"></i> Fail.';
+    } else {
+        e.innerHTML = '<i style="color: green" class="fa fa-check-circle"></i> Loaded.';
+    }
+
+</script>
+
+</body>
+</html>
